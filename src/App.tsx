@@ -5,23 +5,20 @@ function App() {
     <div
       style={{
         display: "flex",
-        gap: "20px",
         justifyContent: "center",
+        gap: "20px",
         marginTop: "50px",
+        flexWrap: "wrap",
       }}
     >
-      {/* Produto não adicionado */}
       <CardProduto
         nome="Mouse Gamer RGB"
         preco={149.9}
-        adicionado={false}
       />
 
-      {/* Produto adicionado */}
       <CardProduto
         nome="Teclado Mecânico"
         preco={299.9}
-        adicionado={true}
       />
     </div>
   );
