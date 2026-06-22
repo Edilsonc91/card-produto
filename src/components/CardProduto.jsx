@@ -1,8 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 /*
   Container principal do card.
-  Responsável pela aparência geral do produto.
 */
 const CardContainer = styled.div`
   width: 300px;
@@ -15,10 +15,9 @@ const CardContainer = styled.div`
 `;
 
 /*
-  Título do produto.
+  Nome do produto.
 */
 const NomeProduto = styled.h2`
-  font-size: 1.5rem;
   color: #333;
   margin-bottom: 10px;
 `;
@@ -34,8 +33,7 @@ const PrecoProduto = styled.p`
 `;
 
 /*
-  Botão com estilização dinâmica.
-  A cor muda de acordo com a prop "adicionado".
+  Botão com cor dinâmica.
 */
 const BotaoCarrinho = styled.button`
   background-color: ${(props) =>
@@ -47,17 +45,26 @@ const BotaoCarrinho = styled.button`
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 
   &:hover {
     opacity: 0.9;
   }
 `;
 
-/*
-  Componente CardProduto.
-*/
-function CardProduto({ nome, preco, adicionado }) {
+function CardProduto({ nome, preco }) {
+  /*
+    Estado que controla se o produto foi adicionado.
+  */
+  const [adicionado, setAdicionado] = useState(false);
+
+  /*
+    Alterna o estado ao clicar no botão.
+  */
+  const adicionarAoCarrinho = () => {
+    setAdicionado(!adicionado);
+  };
+
   return (
     <CardContainer>
       <NomeProduto>{nome}</NomeProduto>
@@ -66,8 +73,13 @@ function CardProduto({ nome, preco, adicionado }) {
         R$ {preco.toFixed(2)}
       </PrecoProduto>
 
-      <BotaoCarrinho adicionado={adicionado}>
-        Adicionar ao carrinho
+      <BotaoCarrinho
+        adicionado={adicionado}
+        onClick={adicionarAoCarrinho}
+      >
+        {adicionado
+          ? "Adicionado ao carrinho"
+          : "Adicionar ao carrinho"}
       </BotaoCarrinho>
     </CardContainer>
   );
